@@ -1,0 +1,59 @@
+DTM só aceita a entrada se todos os 0s forem correspondidos com 1s, com a fita terminando em ".":
+{
+    "states": ["q0", "q1", "q2", "q3", "q4"],
+    "input_symbols": ["0", "1"],
+    "tape_symbols": ["0", "1", "x", "y", "."],
+    "transitions": {
+        "q0": {
+            "0": ["q1", "x", "R"],
+            "y": ["q3", "y", "R"]
+        },
+        "q1": {
+            "0": ["q1", "0", "R"],
+            "1": ["q2", "y", "L"],
+            "y": ["q1", "y", "R"]
+        },
+        "q2": {
+            "0": ["q2", "0", "L"],
+            "x": ["q0", "x", "R"],
+            "y": ["q2", "y", "L"]
+        },
+        "q3": {
+            "y": ["q3", "y", "R"],
+            ".": ["q4", ".", "R"]
+        }
+    },
+    "initial_state": "q0",
+    "blank_symbol": ".",
+    "final_states": ["q4"]
+}
+
+Entradas válidas para teste:
+"01" , "0011" , "000111"      -> Accepted
+"0" , "10" , "001" , "111000" -> Rejected
+
+
+
+DTM para contar o número de 1s e aceitá-los se for par:
+{
+    "states": ["q0", "q1", "q2", "q3"],
+    "input_symbols": ["0", "1"],
+    "tape_symbols": ["0", "1", "x", "."],
+    "transitions": {
+        "q0": {
+            "1": ["q1", "x", "R"],
+            ".": ["q2", ".", "R"]
+        },
+        "q1": {
+            "1": ["q0", "x", "R"],
+            ".": ["q3", ".", "R"]
+        }
+    },
+    "initial_state": "q0",
+    "blank_symbol": ".",
+    "final_states": ["q2"]
+}
+
+Entradas válidas para teste:
+"11" , "1111" , "111111" -> Accepted
+"1" , "111" , "11111"    -> Rejected
